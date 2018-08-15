@@ -1,0 +1,12 @@
+{
+    "pt-br": {
+        "invalid_email": "Digite um e-mail válido",
+        "passowrd_min_6_digits": "Senha deve conter no mínimo 6 dígitos",
+        "user_not_found": "Usuário ou senha não econtrados"
+    },
+    "en-us": {
+        "invalid_email": "E-mail is not valid",
+        "passowrd_min_6_digits": "The password must be 6 characters long or more.",
+        "user_not_found": "User or password not found"
+    }
+}

@@ -1,22 +1,11 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import SignUp from "./src/pages/SignUp/signup";
+import { createStackNavigator } from 'react-navigation'
+import Signup from './src/pages/SignUp/signup'
+import Login from './src/pages/Login/login'
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <SignUp />
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
+var stack = createStackNavigator({
+  LoginScreen: Login,
+  SignUpScreen: Signup
 });
+
+export default stack;
+

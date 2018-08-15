@@ -3,17 +3,16 @@ import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { userService } from "../../services/user-service";
 import Loading from "../../shared/components/loading";
 
-export default class LoginSignUp extends React.Component {
+
+export default class Login extends React.Component {
   static navigationOptions = (navigation) => {
     return {
-      title: "Sign Up"
+      header: null
     }
   }
   state = {
     username: "",
     password: "",
-    name: "",
-    nickName: "",
     error: null,
     loading: false
   };
@@ -22,19 +21,17 @@ export default class LoginSignUp extends React.Component {
     const usermodel = {
       email: this.state.username,
       password: this.state.password,
-      name: this.state.name,
-      nickName: this.state.nickName
     }
 
-    userService.signUp(usermodel)
-      .then(credential => {
-        this.showHideLoading(false);
-      }).catch(errorMessage => {
-        this.showHideLoading(false);
-        this.setState({
-          error: errorMessage
-        })
-      });
+    // userService.signUp(usermodel)
+    //   .then(credential => {
+    //     this.showHideLoading(false);
+    //   }).catch(errorMessage => {
+    //     this.showHideLoading(false);
+    //     this.setState({
+    //       error: errorMessage
+    //     })
+    //   });
   }
 
   showHideLoading(visible = true) {
@@ -74,25 +71,6 @@ export default class LoginSignUp extends React.Component {
           />
           <TextInput />
 
-          <TextInput
-            style={styles.textInput}
-            placeholder={"Name"}
-            autoCapitalize={"none"}
-            onChangeText={name => {
-              this.setState({ name });
-            }}
-          />
-          <TextInput />
-
-          <TextInput
-            style={styles.textInput}
-            placeholder={"Nick Name"}
-            autoCapitalize={"none"}
-            onChangeText={nickName => {
-              this.setState({ nickName });
-            }}
-          />
-          <TextInput />
           {
             this.state.error ?
               <View>
@@ -105,12 +83,17 @@ export default class LoginSignUp extends React.Component {
               </View>
               : null
           }
-          <Button title={"Sign Up"}
+          <Button title={"Login"}
             onPress={() => {
               this.setState({
                 error: null,
                 loading: true
               }, () => this.signUp())
+            }} />
+
+          <Button title={"Cadastre-se"}
+            onPress={() => {
+              this.props.navigation.navigate("SignUpScreen");
             }} />
         </View>
       </Loading>

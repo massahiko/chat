@@ -1,4 +1,6 @@
 import * as firebase from 'firebase';
+import { errorMessageService } from './error-message'
+
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -22,7 +24,20 @@ export const userService = {
             ).then(credential => {
                 resolve(credential);
             }).catch(error => {
-                reject(error.message);
+                var messageToShow = "Ocorreu um erro inesperado.";
+                console.log(error.message);
+                switch (error.message) {
+                    case "The email address is badly formatted.":
+                        messageToShow = errorMessageService.getErrorByName("invalid_email", "en-us");
+                        break;
+                    case "The password must be 6 characters long or more.":
+                        messageToShow = errorMessageService.getErrorByName("passowrd_min_6_digits", "en-us");
+                        break;
+                    default:
+                        messageToShow = "Ocorreu um erro inesperado"
+                        break;
+                }
+                reject(messageToShow);
             });
         });
     }
