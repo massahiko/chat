@@ -11,27 +11,23 @@ export default class Login extends React.Component {
     }
   }
   state = {
-    username: "",
+    email: "",
     password: "",
     error: null,
     loading: false
   };
 
-  signUp() {
-    const usermodel = {
-      email: this.state.username,
-      password: this.state.password,
-    }
-
-    // userService.signUp(usermodel)
-    //   .then(credential => {
-    //     this.showHideLoading(false);
-    //   }).catch(errorMessage => {
-    //     this.showHideLoading(false);
-    //     this.setState({
-    //       error: errorMessage
-    //     })
-    //   });
+  login() {
+    userService
+      .login(this.state.email, this.state.password)
+      .then(credentials => {
+        console.log(credentials);
+        this.showHideLoading(false);
+        this.props.navigation.navigate("ChatStack");
+      }).catch(error => {
+        console.log(error.message);
+        this.showHideLoading(false);
+      });
   }
 
   showHideLoading(visible = true) {
@@ -55,8 +51,8 @@ export default class Login extends React.Component {
             style={styles.textInput}
             placeholder={"User Name"}
             autoCapitalize={"none"}
-            onChangeText={username => {
-              this.setState({ username });
+            onChangeText={email => {
+              this.setState({ email });
             }}
           />
           <TextInput />
@@ -88,7 +84,7 @@ export default class Login extends React.Component {
               this.setState({
                 error: null,
                 loading: true
-              }, () => this.signUp())
+              }, () => this.login())
             }} />
 
           <Button title={"Cadastre-se"}

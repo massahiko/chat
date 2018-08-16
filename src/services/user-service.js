@@ -40,5 +40,17 @@ export const userService = {
                 reject(messageToShow);
             });
         });
+    },
+
+    login: (email, password) => {
+        return new Promise((resolve, reject) => {
+            firebase.auth()
+                .signInWithEmailAndPassword(email, password)
+                .then(credentials => {
+                    resolve(credentials)
+                }).catch(error => {
+                    reject(error);
+                })
+        })
     }
 }
