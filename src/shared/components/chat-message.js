@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default class ChatMessage extends React.Component {
 
     render() {
-        var messageFromMe = this.props.fromMe;
+        var messageFromMe = this.props.message.fromMe;
         return (
             <View style={[
                 styles.messageContainer,
@@ -25,6 +25,7 @@ export default class ChatMessage extends React.Component {
                         {/* Message */}
                         <View>
                             <Text>{this.props.message.message}</Text>
+                            <Text style={{ fontSize: 10 }}>{this.props.message.date}</Text>
                         </View>
 
                         {/* Date */}
