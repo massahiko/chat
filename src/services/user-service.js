@@ -51,7 +51,7 @@ export const userService = {
                 .then(credentials => {
                     var userObject = {
                         email: email,
-                        uid: credentials.user
+                        uid: credentials.user.uid
                     }
                     userService
                         .setUser(userObject)
@@ -74,7 +74,7 @@ export const userService = {
             userService.getUser().then(user => {
                 newMessage = {
                     ...newMessage,
-                    uid: user.uid
+                    uid: user ? user.uid : ""
                 }
 
                 firebase
@@ -112,11 +112,23 @@ export const userService = {
             AsyncStorage
                 .getItem(USER_STORAGE_NAME)
                 .then(user => {
-                    resolve(JSON.parse(user))
-                        .catch(error => {
-                            reject(error)
-                        });
+                    resolve(JSON.parse(user));
                 })
+                .catch(error => {
+                    reject(error)
+                });
+        })
+
+    },
+
+    logout: () => {
+        return new Promise((resolve, reject) => {
+            //AsyncStorage.removeItem(USER_STORAGE_NAME)
+            AsyncStorage
+                .clear()
+                .then(() => {
+                    resolve(true);
+                });
         })
     }
 }

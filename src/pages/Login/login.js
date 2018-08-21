@@ -27,15 +27,15 @@ export default class Login extends React.Component {
       }).catch(error => {
         console.log(error.message);
         this.showHideLoading(false);
-      });
+      })
   }
 
   showHideLoading(visible = true) {
-    setTimeout(() => {
-      this.setState({
-        loading: visible
-      })
-    }, 1500);
+    //setTimeout(() => {
+    this.setState({
+      loading: visible
+    })
+    //}, 1500);
   }
 
   render() {

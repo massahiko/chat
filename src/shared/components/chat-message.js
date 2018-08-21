@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default class ChatMessage extends React.Component {
 
     render() {
-        var messageFromMe = this.props.message.fromMe;
+        var messageFromMe = this.props.fromMe;
         return (
             <View style={[
                 styles.messageContainer,
